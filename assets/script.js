@@ -10,12 +10,12 @@ var evKey = '14df59e4-ba59-4b25-a599-8f0da41f7a88';
 
 
 
-$('#submit-button').on('click', getstuff);
+$('#submit-btn').on('click', getstuff);
 
 function getstuff() {
     //get search terms
     var addr = $('#address-input').val();
-    var radius = $('#radius-innput').val();
+    var radius = $('#radius-input').val();
     //run fetch for geocoordinates
     fetch('https://geocode.search.hereapi.com/v1/geocode?q='+ addr +'&limit=1&apiKey=' + geoKey)
     .then(function(response) {
