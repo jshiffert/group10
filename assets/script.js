@@ -23,12 +23,12 @@ function getstuff() {
     })
     //extract coordinates from returned object
     .then(function(data) {
-        console.log(data);
+        // console.log(data);
         //store coordinates in values
-        var lat = data.items[0].position.lat;
-        var lon = data.items[0].position.lng;
-        console.log(lat);
-        console.log(lon);
+        // var lat = data.items[0].position.lat;
+        // var lon = data.items[0].position.lng;
+        // console.log(lat);
+        // console.log(lon);
         //run new fetch to chargemap api
         fetch('https://api.openchargemap.io/v3/poi?key='+ evKey + '&output=json&latitude=' + data.items[0].position.lat + '&longitude=' + data.items[0].position.lng + ' &distance=' + radius + ' &maxresults=10')
         .then(function(response) {
