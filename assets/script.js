@@ -40,3 +40,26 @@ function getstuff() {
         })
     })
 }
+
+function printResults(arr) {
+    //get result element
+    var resultListEl = $('#results-list');
+
+
+    //loop over results, creating elements and adding to list
+    for(i = 0; i< 10; i++) {
+        var a = i+1;
+
+        var resultEl = $('<li>');
+
+        resultEl.text("Result " + a + ": ");
+
+        resultEl.addClass('list-group-item px-3 border-0');
+
+        resultListEl.append(resultEl);
+
+    }
+
+}
+
+printResults();
