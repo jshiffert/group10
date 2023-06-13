@@ -1,16 +1,40 @@
 var searchHistory = [];
 
-function renderHistory() {
-    // create list for search history
-    var historyListEl = $('<div>');
-    historyListEl.addClass('list-group');
 
+function storeHistory() {
+    // store history from submissions
+    localStorage.setItem("evSearch", JSON.stringify(searchHistory));
+}
+
+function renderHistory() {
+    var rootEl = $('#search-panel');
+    // remove history display if needed
+    if ($('#history-list').length !== 0) {
+        console.log("hi");
+        $('#history-list').remove();
+    };
+
+    // create history element
+    historyListEl = $('<div>');
+    historyListEl.addClass('list-group');
+    historyListEl.attr("id", "history-list");
     
+    // create and append list elements
+    for (var i = 0; i < searchHistory.length; i++) {
+        var item = searchHistory[i];
+        var hButton = document.createElement("button");
+        $(hButton).addClass("list-group-item list-group-item-action");
+        $(hButton).html(item[0]+'<br>Radius: '+item[1]);
+        historyListEl[0].appendChild(hButton);
+    };
+
+    // append to parent element
+    rootEl.append(historyListEl);
 }
 
 function initHistory() {
     // get history from storage
-    var storedHistory = JSON.parse(localStorage.getItem("evAddressSearch"));
+    var storedHistory = JSON.parse(localStorage.getItem("evSearch"));
     //populate history array
     if (storedHistory !== null) {
         searchHistory = storedHistory;
@@ -28,9 +52,9 @@ $('#submit-btn').click(function() {
     };
 
     // add search to history
-    searchHistory.unshift(addressInput);
-    if (searchHistory.length > 8) {
-        searchHistory.splice[-1];
+    searchHistory.unshift([addressInput,radiusInput]);
+    if (searchHistory.length > 5) {
+        searchHistory.length = 5;
     }
     // reset values
     $('#address-input').val("");
