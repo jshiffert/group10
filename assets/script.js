@@ -69,6 +69,7 @@ function getstuff() {
         .then(function(data) {
             //log final result
             console.log(data);
+
             //call function to print results, passing returned object from api
             printResults(data);
         })
@@ -78,6 +79,7 @@ function getstuff() {
 function printResults(arr) {
     //get result element
     console.log(arr);
+
     var resultListEl = $('#results-list');
 
 
@@ -86,6 +88,7 @@ function printResults(arr) {
         var a = i+1;
 
         var resultEl = $('<li>');
+
 
         resultEl.text("Result " + i + ": " + arr[i].AddressInfo.AddressLine1);
 
@@ -122,6 +125,8 @@ $('#submit-btn').click(function() {
     storeHistory();
     renderHistory();
 })
+
+
 
 // initialize history
 initHistory();
