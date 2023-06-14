@@ -69,12 +69,17 @@ function getstuff() {
         .then(function(data) {
             //log final result
             console.log(data);
+
+            //call function to print results, passing returned object from api
+            printResults(data);
         })
     })
-};
+}
 
 function printResults(arr) {
     //get result element
+    console.log(arr);
+
     var resultListEl = $('#results-list');
 
 
@@ -84,7 +89,8 @@ function printResults(arr) {
 
         var resultEl = $('<li>');
 
-        resultEl.text("Result " + a + ": ");
+
+        resultEl.text("Result " + i + ": " + arr[i].AddressInfo.AddressLine1);
 
         resultEl.addClass('list-group-item px-3 border-0');
 
@@ -124,18 +130,28 @@ $(document).on('click', '.history-item', function() {
     console.log($(this)[0]);
     if ($(this).is('#item0')) {
         console.log(searchHistory[0])
+        $('#address-input').val(searchHistory[0][0]);
+        $('#radius-input').val(searchHistory[0][1]);
     } else if ($(this).is('#item1')) {
         console.log(searchHistory[1])
+        $('#address-input').val(searchHistory[1][0]);
+        $('#radius-input').val(searchHistory[1][1]);
     } else if ($(this).is('#item2')) {
         console.log(searchHistory[2])
+        $('#address-input').val(searchHistory[2][0]);
+        $('#radius-input').val(searchHistory[2][1]);
     } else if ($(this).is('#item3')) {
         console.log(searchHistory[3])
+        $('#address-input').val(searchHistory[3][0]);
+        $('#radius-input').val(searchHistory[3][1]);
     } else if ($(this).is('#item4')) {
         console.log(searchHistory[4])
+        $('#address-input').val(searchHistory[4][0]);
+        $('#radius-input').val(searchHistory[4][1]);
     }
     getstuff();
 });
 
-printResults();
+// printResults();
 // initialize history
 initHistory();
