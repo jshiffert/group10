@@ -69,6 +69,7 @@ function getstuff() {
         .then(function(data) {
             //log final result
             console.log(data);
+            //call function to print results, passing returned object from api
             printResults(data);
         })
     })
@@ -122,6 +123,5 @@ $('#submit-btn').click(function() {
     renderHistory();
 })
 
-printResults();
 // initialize history
 initHistory();
