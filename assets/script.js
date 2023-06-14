@@ -87,7 +87,7 @@ function printResults(arr) {
 
         var resultEl = $('<li>');
 
-        resultEl.text("Result " + i + ": " + arr[i].AddressInfo.AddressLine1);
+        resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town);
 
         resultEl.addClass('list-group-item px-3 border-0');
 
