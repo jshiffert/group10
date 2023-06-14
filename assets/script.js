@@ -11,7 +11,6 @@ function renderHistory() {
     var rootEl = $('#search-panel');
     // remove history display if needed
     if ($('#history-list').length !== 0) {
-        console.log("hi");
         $('#history-list').remove();
     };
 
@@ -24,8 +23,9 @@ function renderHistory() {
     for (var i = 0; i < searchHistory.length; i++) {
         var item = searchHistory[i];
         var hButton = document.createElement("button");
-        $(hButton).addClass("list-group-item list-group-item-action");
+        $(hButton).addClass("list-group-item list-group-item-action history-item");
         $(hButton).html(item[0]+'<br>Radius: '+item[1]);
+        $(hButton).attr("id", "item"+i.toString());
         historyListEl[0].appendChild(hButton);
     };
 
@@ -119,6 +119,22 @@ $('#submit-btn').click(function() {
     storeHistory();
     renderHistory();
 })
+
+$(document).on('click', '.history-item', function() {
+    console.log($(this)[0]);
+    if ($(this).is('#item0')) {
+        console.log(searchHistory[0])
+    } else if ($(this).is('#item1')) {
+        console.log(searchHistory[1])
+    } else if ($(this).is('#item2')) {
+        console.log(searchHistory[2])
+    } else if ($(this).is('#item3')) {
+        console.log(searchHistory[3])
+    } else if ($(this).is('#item4')) {
+        console.log(searchHistory[4])
+    }
+    getstuff();
+});
 
 printResults();
 // initialize history
