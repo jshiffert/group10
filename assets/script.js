@@ -69,6 +69,7 @@ function getstuff() {
         .then(function(data) {
             //log final result
             console.log(data);
+
             //call function to print results, passing returned object from api
             printResults(data);
         })
@@ -78,6 +79,7 @@ function getstuff() {
 function printResults(arr) {
     //get result element
     console.log(arr);
+
     var resultListEl = $('#results-list');
 
 
@@ -88,6 +90,7 @@ function printResults(arr) {
         var resultEl = $('<li>');
 
         resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town);
+
 
         resultEl.addClass('list-group-item px-3 border-0');
 
@@ -122,6 +125,8 @@ $('#submit-btn').click(function() {
     storeHistory();
     renderHistory();
 })
+
+
 
 // initialize history
 initHistory();
