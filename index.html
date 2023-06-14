@@ -17,25 +17,35 @@
         <h1 class="text-center bg-primary bg-gradient text-light p-4" >Dude, Where's My Charge</h1>
     </div>
     <div class="row grid d-flex" id="main-window">
-        <div class="col-3 h-100 bg-info" id="search-panel">
+        <div class="col-12 col-md-6 col-lg-3 h-100 bg-info" id="search-panel">
+
             <div class="input-group p-5">
                 <input id="address-input" type="text" class="form-control" placeholder="Address">
             </div>
             <div class="input-group p-5">
                 <input id="radius-input" type="text" class="form-control" placeholder="Radius">
             </div>
+
             <div class="p-5">
                 <button id="submit-btn" type="button" class="btn btn-primary">Submit</button>
+
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-12 col-md-6 col-lg-9">
             <div class="card m-3">
+                <iframe src="https://map.openchargemap.io/?mode=embedded" frameborder="0" width="100%" height="400px"></iframe> 
                 <div class="card-title px-3 py-1 title" id="city-title">Results</div>
-                <ul class="list-group">
-                    <li class="list-group-item px-3 border-0" id="today-symbol">Result1: </li>
-                    <li class="list-group-item px-3 border-0" id="today-temp">Result2: </li>
-                    <li class="list-group-item px-3 border-0" id="today-wind">Result3: </li>
-                    <li class="list-group-item px-3 border-0" id="today-humidity">Result4: </li>
+                <ul class="list-group" id="results-list">
+                    <!-- <li class="list-group-item px-3 border-0" id="result1">Result 1: </li>
+                    <li class="list-group-item px-3 border-0" id="result2">Result 2: </li>
+                    <li class="list-group-item px-3 border-0" id="result3">Result 3: </li>
+                    <li class="list-group-item px-3 border-0" id="result4">Result 4: </li>
+                    <li class="list-group-item px-3 border-0" id="result5">Result 5: </li>
+                    <li class="list-group-item px-3 border-0" id="result6">Result 6: </li>
+                    <li class="list-group-item px-3 border-0" id="result7">Result 7: </li>
+                    <li class="list-group-item px-3 border-0" id="result8">Result 8: </li>
+                    <li class="list-group-item px-3 border-0" id="result9">Result 9: </li>
+                    <li class="list-group-item px-3 border-0" id="result10">Result 10: </li> -->
                 </ul>
             </div>
         </div>
