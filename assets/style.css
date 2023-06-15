@@ -9,9 +9,3 @@ body {
 #map {
     height: 600px;
 }
-
-
-.dark-theme {
-    background-color: black;
-    color: yellow;
-}
