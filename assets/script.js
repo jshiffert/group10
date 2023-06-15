@@ -72,6 +72,7 @@ function getstuff() {
 
             //call function to print results, passing returned object from api
             printResults(data);
+            mapPoints(data);
         })
     })
 }
@@ -98,6 +99,20 @@ function printResults(arr) {
 
     }
 
+}
+
+function mapPoints(data) {
+    markerArray = [];
+    layerGroup.clearLayers();
+    for (i = 0; i < data.length; i++) {
+        var result = data[i];
+        var lat = result.AddressInfo.Latitude
+        var lon = result.AddressInfo.Longitude
+        var marker = L.marker([lat, lon]).addTo(layerGroup);
+        markerArray.push(marker);
+    }
+    var group = new L.featureGroup(markerArray);
+    map.fitBounds(group.getBounds());
 }
 
 function addInput() {
@@ -167,3 +182,13 @@ $(document).on('click', '.history-item', function() {
 // printResults();
 // initialize history
 initHistory();
+
+
+var map = L.map('map').setView([40.007364780101966, -83.03048484854264], 10);
+
+var layerGroup = L.layerGroup().addTo(map);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
