@@ -124,8 +124,20 @@ $('#submit-btn').click(function() {
     //store and render new history elements
     storeHistory();
     renderHistory();
-})
+});
 
+    // alternative way to search with enter
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        getstuff();
+        addInput();
+        //store and render new history elements
+        storeHistory();
+        renderHistory();
+    }
+});
+
+//search the values when clicking a history item
 $(document).on('click', '.history-item', function() {
     console.log($(this)[0]);
     if ($(this).is('#item0')) {
