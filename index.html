@@ -9,31 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Fira+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/style.css">
     <title>Dude, Where's My Charge</title>
 </head>
-<body>
-    <div class="container-fluid" id="header">
-        <h1 class="text-center bg-primary bg-gradient text-light p-4" >Dude, Where's My Charge</h1>
+<body class="bg-gradient-to-r from-cyan-500 to-blue-500">
+    <div class="container-fluid bg-gradient-to-r from-cyan-500 to-blue-500" id="header">
+        <h1 class="text-center text-5xl text-orange-50 p-4" >Dude, Where's My Charge</h1>
     </div>
-    <div class="row grid d-flex" id="main-window">
-        <div class="col-12 col-md-6 col-lg-3 h-100 bg-info" id="search-panel">
-
-            <div class="input-group p-5">
+    <div class="row grid d-flex bg-gradient-to-r from-cyan-500 to-blue-500" id="main-window">
+        <div class="col-3 h-100  bg-gradient-to-r from-cyan-500 to-sky-500 shadow-gray-800  rounded-md m-5 w-auto shrink w-64" id="search-panel">
+            <div class="input-group p-5 shadow-gray-950">
                 <input id="address-input" type="text" class="form-control" placeholder="Address">
             </div>
             <div class="input-group p-5">
-                <input id="radius-input" type="text" class="form-control" placeholder="Radius">
+                <input id="radius-input" type="text" class="form-control" placeholder="Radius" >
             </div>
-            <div class="d-flex justify-content-center">
-            <button type="button" id="submit-btn" class="btn btn-primary">submit</button>
+            <div class="p-5">
+                <button id="submit-btn" type="button" class="btn bg-blue-500 shadow-gray-500 shadow-xl border-1 border-black text-white m-1 hover:bg-blue-400 ">Submit</button>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-9">
-            <div class="card m-3">
-                <iframe src="https://map.openchargemap.io/?mode=embedded" frameborder="0" width="100%" height="400px"></iframe> 
+        <div class="col-9">
+            <div class="card m-3 outline outline-black bg-orange-50">
                 <div class="card-title px-3 py-1 title" id="city-title">Results</div>
-                <ul class="list-group" id="results-list">
+                <ul class="list-group shadow-gray-800 shadow-xl" id="results-list">
                     <!-- <li class="list-group-item px-3 border-0" id="result1">Result 1: </li>
                     <li class="list-group-item px-3 border-0" id="result2">Result 2: </li>
                     <li class="list-group-item px-3 border-0" id="result3">Result 3: </li>
@@ -52,4 +51,5 @@
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="./assets/script.js"></script>
+
 </html>
