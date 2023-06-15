@@ -11,7 +11,6 @@ function renderHistory() {
     var rootEl = $('#search-panel');
     // remove history display if needed
     if ($('#history-list').length !== 0) {
-        console.log("hi");
         $('#history-list').remove();
     };
 
@@ -24,8 +23,9 @@ function renderHistory() {
     for (var i = 0; i < searchHistory.length; i++) {
         var item = searchHistory[i];
         var hButton = document.createElement("button");
-        $(hButton).addClass("list-group-item list-group-item-action");
+        $(hButton).addClass("list-group-item list-group-item-action history-item");
         $(hButton).html(item[0]+'<br>Radius: '+item[1]);
+        $(hButton).attr("id", "item"+i.toString());
         historyListEl[0].appendChild(hButton);
     };
 
@@ -72,6 +72,7 @@ function getstuff() {
 
             //call function to print results, passing returned object from api
             printResults(data);
+            mapPoints(data);
         })
     })
 }
@@ -79,7 +80,7 @@ function getstuff() {
 function printResults(arr) {
     //get result element
     console.log(arr);
-
+    $("li").remove();
     var resultListEl = $('#results-list');
 
 
@@ -89,15 +90,29 @@ function printResults(arr) {
 
         var resultEl = $('<li>');
 
+        resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town + "  Public/Private: " + arr[i].UsageType.Title + " Charge Type: " + arr[i].Connections.LevelID);
 
-        resultEl.text("Result " + i + ": " + arr[i].AddressInfo.AddressLine1);
 
-        resultEl.addClass('list-group-item px-3 border-0');
+        resultEl.addClass('list-group-item px-3 border-0 bg-orange-50');
 
         resultListEl.append(resultEl);
 
     }
 
+}
+
+function mapPoints(data) {
+    markerArray = [];
+    layerGroup.clearLayers();
+    for (i = 0; i < data.length; i++) {
+        var result = data[i];
+        var lat = result.AddressInfo.Latitude
+        var lon = result.AddressInfo.Longitude
+        var marker = L.marker([lat, lon]).addTo(layerGroup);
+        markerArray.push(marker);
+    }
+    var group = new L.featureGroup(markerArray);
+    map.fitBounds(group.getBounds());
 }
 
 function addInput() {
@@ -124,9 +139,56 @@ $('#submit-btn').click(function() {
     //store and render new history elements
     storeHistory();
     renderHistory();
-})
+});
 
+    // alternative way to search with enter
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        getstuff();
+        addInput();
+        //store and render new history elements
+        storeHistory();
+        renderHistory();
+    }
+});
 
+//search the values when clicking a history item
+$(document).on('click', '.history-item', function() {
+    console.log($(this)[0]);
+    if ($(this).is('#item0')) {
+        console.log(searchHistory[0])
+        $('#address-input').val(searchHistory[0][0]);
+        $('#radius-input').val(searchHistory[0][1]);
+    } else if ($(this).is('#item1')) {
+        console.log(searchHistory[1])
+        $('#address-input').val(searchHistory[1][0]);
+        $('#radius-input').val(searchHistory[1][1]);
+    } else if ($(this).is('#item2')) {
+        console.log(searchHistory[2])
+        $('#address-input').val(searchHistory[2][0]);
+        $('#radius-input').val(searchHistory[2][1]);
+    } else if ($(this).is('#item3')) {
+        console.log(searchHistory[3])
+        $('#address-input').val(searchHistory[3][0]);
+        $('#radius-input').val(searchHistory[3][1]);
+    } else if ($(this).is('#item4')) {
+        console.log(searchHistory[4])
+        $('#address-input').val(searchHistory[4][0]);
+        $('#radius-input').val(searchHistory[4][1]);
+    }
+    getstuff();
+});
 
+// printResults();
 // initialize history
 initHistory();
+
+
+var map = L.map('map').setView([40.007364780101966, -83.03048484854264], 10);
+
+var layerGroup = L.layerGroup().addTo(map);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
