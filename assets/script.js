@@ -89,7 +89,7 @@ function printResults(arr) {
 
         var resultEl = $('<li>');
 
-        resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town + "  " + arr[i].UsageType.Title);
+        resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town + "  Public/Private: " + arr[i].UsageType.Title + " Charge Type: " + arr[i].Connections.LevelID);
 
 
         resultEl.addClass('list-group-item px-3 border-0 bg-orange-50');
