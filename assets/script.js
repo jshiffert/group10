@@ -204,6 +204,7 @@ function printTable (jsonData) {
     $('table').remove();
     var container = $('#city-title');
     var table = $("<table>");
+    table.addClass('table table-hover shadow-gray-800 shadow-xl');
     var rowData = [];
 
 
@@ -265,5 +266,4 @@ function removeNull (jsonData, k) {
         }
 
         return jsonData;
-    }
-    
+}
