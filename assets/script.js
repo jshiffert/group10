@@ -201,6 +201,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 function printTable (jsonData) {
     //
+    $('table').remove();
     var container = $('#city-title');
     var table = $("<table>");
     var rowData = [];
@@ -229,6 +230,7 @@ function printTable (jsonData) {
      //loops over array
     for(let k = 0; k<jsonData.length; k++) {
         var cAddr = [jsonData[k].AddressInfo.AddressLine1 + ", " + jsonData[k].AddressInfo.Town];
+        removeNull (jsonData, k);
         rowData.push(cAddr , jsonData[k].UsageType.Title , jsonData[k].Connections[0].LevelID , jsonData[k].Connections[0].ConnectionType.Title);
         newTableRow(rowData, table)
         rowData = [];
@@ -249,3 +251,19 @@ function newTableRow (rowData, table) {
     });
     table.append(tr);
 }
+
+function removeNull (jsonData, k) {
+        if(jsonData[k].UsageType == null){
+            jsonData[k].UsageType = {};
+            jsonData[k].UsageType.Title = "N/A";
+        }else if(jsonData[k].Connections == null){
+            jsonData[k].Connections = [{}]
+            jsonData[k].Connections[0].LevelID = "N/A";
+            jsonData[k].Connections[0].ConnectionType.Title = "N/A";    
+        }else if(jsonData[k].Connections[0].ConnectionType.Title == null){
+            jsonData[k].Connections[0].ConnectionType.Title = "N/A";
+        }
+
+        return jsonData;
+    }
+    
