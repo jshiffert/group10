@@ -75,35 +75,37 @@ function getstuff() {
             console.log(data);
 
             //call function to print results, passing returned object from api
-            printResults(data);
+            printTable(data);
+            // printResults(data);
             mapPoints(data);
         })
     })
 }
 
-function printResults(arr) {
-    //get result element
-    console.log(arr);
-    $("li").remove();
-    var resultListEl = $('#results-list');
+// function printResults(arr) {
+//     //get result element
+//     console.log(arr);
+//     //remove any existing output
+//     $("li").remove();
+//     var resultListEl = $('#results-list');
 
 
-    //loop over results, creating elements and adding to list
-    for(i = 0; i< 10; i++) {
-        var a = i+1;
+//     //loop over results, creating elements and adding to list
+//     for(i = 0; i< arr.length; i++) {
+//         var a = i+1;
 
-        var resultEl = $('<li>');
+//         var resultEl = $('<li>');
 
-        resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town + "  Public/Private: " + arr[i].UsageType.Title + " Charge Type: " + arr[i].Connections.LevelID);
+//         resultEl.text("Result " + a + ": " + arr[i].AddressInfo.AddressLine1 + ", " +arr[i].AddressInfo.Town + "  Public/Private: " + arr[i].UsageType.Title + " Charge Type: " + arr[i].Connections[0].LevelID + arr[i].Connections[0].ConnectionType.Title);
 
 
-        resultEl.addClass('list-group-item px-3 border-0 bg-orange-50');
+//         resultEl.addClass('list-group-item px-3 border-0 bg-orange-50');
 
-        resultListEl.append(resultEl);
+//         resultListEl.append(resultEl);
 
-    }
+//     }
 
-}
+// }
 
 function mapPoints(data) {
     markerArray = [];
@@ -196,3 +198,76 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+
+
+
+
+function printTable (jsonData) {
+    //
+    $('table').remove();
+    var container = $('#city-title');
+    var table = $("<table>");
+    table.addClass('table table-hover shadow-gray-800 shadow-xl');
+    var rowData = [];
+
+
+    // Get the keys (column names) of the first object in the JSON data
+    var cols = ["Address", "Public/Private", "Charge Level", "Charge Type"];
+
+    //create table head and table row element
+    var thead = $("<thead>");
+    var tr = $("<tr>");
+
+
+    //create table headers from column array
+    $.each(cols, function(i, item){
+        let th = $("<th>");
+         // Set the column name as the text of the header cell
+        th.text(item);
+         // Append the header cell to the header row
+        tr.append(th);
+     });
+     thead.append(tr); // Append the header row to the header
+     table.append(tr) // Append the header to the table
+
+
+     //loops over array
+    for(let k = 0; k<jsonData.length; k++) {
+        var cAddr = [jsonData[k].AddressInfo.AddressLine1 + ", " + jsonData[k].AddressInfo.Town];
+        removeNull (jsonData, k);
+        rowData.push(cAddr , jsonData[k].UsageType.Title , jsonData[k].Connections[0].LevelID , jsonData[k].Connections[0].ConnectionType.Title);
+        newTableRow(rowData, table)
+        rowData = [];
+    }
+
+
+        container.append(table) // Append the table to the container element
+
+}
+
+function newTableRow (rowData, table) {
+    console.log(rowData);
+    let tr = $("<tr>");
+    $.each(rowData, function(i, item) {
+        let td = $("<td>");
+        td.text(item);
+        tr.append(td);
+    });
+    table.append(tr);
+}
+
+function removeNull (jsonData, k) {
+        if(jsonData[k].UsageType == null){
+            jsonData[k].UsageType = {};
+            jsonData[k].UsageType.Title = "N/A";
+        }else if(jsonData[k].Connections == null){
+            jsonData[k].Connections = [{}]
+            jsonData[k].Connections[0].LevelID = "N/A";
+            jsonData[k].Connections[0].ConnectionType.Title = "N/A";    
+        }else if(jsonData[k].Connections[0].ConnectionType.Title == null){
+            jsonData[k].Connections[0].ConnectionType.Title = "N/A";
+        }
+
+        return jsonData;
+}
