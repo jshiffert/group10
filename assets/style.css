@@ -1,5 +1,7 @@
 h1{
     font-family: 'Electrolize', sans-serif;
+    text-shadow:2px 2px black;
+
 }
 
 body {
@@ -8,4 +10,19 @@ body {
 
 #map {
     height: 600px;
+    border: 1px solid #ddd;
+}
+
+.form-control {
+    box-shadow: 3px 3px 5px;
+    background-color: #fff7ed;
+}
+
+#item0, #item1, #item2, #item3, #item4 {
+    border-radius: 5px;
+    border-width: 3px;
+    border-color: black;
+    margin-top: 5px;
+    
+    
 }
