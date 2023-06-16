@@ -24,7 +24,11 @@ function renderHistory() {
         var item = searchHistory[i];
         var hButton = document.createElement("button");
         $(hButton).addClass("list-group-item list-group-item-action history-item");
-        $(hButton).html(item[0]+'<br>Radius: '+item[1]);
+        if (item[0].length <= 30) {
+            $(hButton).html(item[0]+'<br>Radius: '+item[1]);
+        } else {
+            $(hButton).html(item[0].substring(0, 30)+'<br>'+item[0].slice(30)+'<br>Radius: '+item[1]);
+        };
         $(hButton).attr("id", "item"+i.toString());
         historyListEl[0].appendChild(hButton);
     };
@@ -185,11 +189,11 @@ $(document).on('click', '.history-item', function() {
 // initialize history
 initHistory();
 
-
+// initialize map
 var map = L.map('map').setView([40.007364780101966, -83.03048484854264], 10);
-
+// point layer group
 var layerGroup = L.layerGroup().addTo(map);
-
+// OSM tile layer
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
