@@ -228,17 +228,22 @@ function printTable (jsonData) {
      table.append(tr) // Append the header to the table
 
 
-     //loops over array
+     //loop to fill out table
     for(let k = 0; k<jsonData.length; k++) {
-        var cAddr = [jsonData[k].AddressInfo.AddressLine1 + ", " + jsonData[k].AddressInfo.Town];
+        //store both pieces of address at current index in one value to push to array
+        var cAddr = jsonData[k].AddressInfo.AddressLine1 + ", " + jsonData[k].AddressInfo.Town;
+        //pass to function to remove null values
         removeNull (jsonData, k);
+        //push all desired values to array for row data
         rowData.push(cAddr , jsonData[k].UsageType.Title , jsonData[k].Connections[0].LevelID , jsonData[k].Connections[0].ConnectionType.Title);
+        //function creates and appends new row to table
         newTableRow(rowData, table)
+        //reset array for row data to empty
         rowData = [];
     }
 
-
-        container.append(table) // Append the table to the container element
+    // Append the completed table to the container element
+        container.append(table) 
 
 }
 
