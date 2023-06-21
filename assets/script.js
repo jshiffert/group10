@@ -288,6 +288,8 @@ function removeNull (jsonData, k) {
             jsonData[k].Connections[0].ConnectionType.Title = "N/A";    
         }else if(jsonData[k].Connections[0].ConnectionType.Title == null){
             jsonData[k].Connections[0].ConnectionType.Title = "N/A";
+        }else if(jsonData[k].Connections[0].LevelID == null){
+            jsonData[k].Connections[0].LevelID = "N/A";
         }
 
         return jsonData;
