@@ -112,9 +112,11 @@ function mapPoints(data) {
     layerGroup.clearLayers();
     for (i = 0; i < data.length; i++) {
         var result = data[i];
-        var lat = result.AddressInfo.Latitude
-        var lon = result.AddressInfo.Longitude
-        var marker = L.marker([lat, lon]).addTo(layerGroup);
+        var lat = result.AddressInfo.Latitude;
+        var lon = result.AddressInfo.Longitude;
+        var address = result.AddressInfo.AddressLine1;
+        var marker = L.marker([lat, lon], {icon: myIcon}).addTo(layerGroup);
+        marker.bindPopup(address);
         markerArray.push(marker);
     }
     var group = new L.featureGroup(markerArray);
@@ -199,6 +201,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+// link icons for map markers
+var myIcon = L.icon({
+    iconUrl: 'https://github.com/jshiffert/group10/assets/130510457/5b6f4d44-d999-495e-8271-45f27a5ff1ca',
+    iconSize: [40,40],
+    iconAnchor: [20,40],
+    popupAnchor: [0,-30]
+});
 
 
 
