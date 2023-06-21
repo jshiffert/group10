@@ -24,3 +24,15 @@ body {
     border-color: black;
     margin-top: 5px;
 }
+/* Default styles for the map container */
+.leaflet-container {
+  width: 100%; /* Set the container to occupy the full width of its parent */
+  height: 400px; /* Adjust the height as per your requirements */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .leaflet-container {
+    height: 300px; /* Adjust the height for smaller screens */
+  }
+}
