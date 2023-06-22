@@ -283,7 +283,7 @@ function removeNull (jsonData, k) {
             jsonData[k].UsageType = {};
             jsonData[k].UsageType.Title = "N/A";
         }else if(jsonData[k].Connections[0] == null){
-            jsonData[k].Connections = [{}]
+            jsonData[k].Connections[0] = [{}]
             jsonData[k].Connections[0].LevelID = "N/A";
             jsonData[k].Connections[0].ConnectionType.Title = "N/A";    
         }else if(jsonData[k].Connections[0].ConnectionType.Title == null){
