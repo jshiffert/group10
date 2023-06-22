@@ -55,16 +55,11 @@ function getstuff() {
     //run fetch for geocoordinates
     fetch('https://geocode.search.hereapi.com/v1/geocode?q='+ addr +'&limit=1&apiKey=' + geoKey)
     .then(function(response) {
-        console.log(response);
         return response.json();
     })
     //extract coordinates from returned object
     .then(function(data) {
-        if(data.items[0] == undefined){
-            console.log('djshfgjhsd');
-            return null;
-        }
-        // 
+        // console.log(data);
         //store coordinates in values
         // var lat = data.items[0].position.lat;
         // var lon = data.items[0].position.lng;
@@ -73,9 +68,7 @@ function getstuff() {
         //run new fetch to chargemap api
         fetch('https://api.openchargemap.io/v3/poi?key='+ evKey + '&output=json&latitude=' + data.items[0].position.lat + '&longitude=' + data.items[0].position.lng + ' &distance=' + radius + ' &maxresults=10')
         .then(function(response) {
-            console.log(response);
-                return response.json();
-            
+            return response.json();
         })
         .then(function(data) {
             //log final result
@@ -288,8 +281,6 @@ function removeNull (jsonData, k) {
             jsonData[k].Connections[0].ConnectionType.Title = "N/A";    
         }else if(jsonData[k].Connections[0].ConnectionType.Title == null){
             jsonData[k].Connections[0].ConnectionType.Title = "N/A";
-        }else if(jsonData[k].Connections[0].LevelID == null){
-            jsonData[k].Connections[0].LevelID = "N/A";
         }
 
         return jsonData;
